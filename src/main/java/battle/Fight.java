@@ -26,7 +26,7 @@ public class Fight {
      * Выполнить
      */
     public void execute() {
-
+        return;
     }
 
     public ArrayList<Ship> getFleet1() {
