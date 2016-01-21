@@ -22,6 +22,10 @@ public class Fight {
         this.fleet2 = fleet2;
     }
 
+    public void execute() {
+
+    }
+
     public ArrayList<Ship> getFleet1() {
         return fleet1;
     }
