@@ -1,6 +1,10 @@
 package battle;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Класс "Бой"
@@ -8,31 +12,89 @@ import java.util.ArrayList;
  */
 public class Fight {
 
-    private final ArrayList<Ship> fleet1;
+    public final static int COUNT_ITERATION = 100;
 
-    private final ArrayList<Ship> fleet2;
+    private final ArrayList<Fleet> fleets;
 
     /**
      * Создать объект
-     * @param fleet1 флот 1
-     * @param fleet2 флот 2
+     * @param fleets коллекция объектов "Флот"
      */
-    public Fight(ArrayList<Ship> fleet1, ArrayList<Ship> fleet2) {
-        this.fleet1 = fleet1;
-        this.fleet2 = fleet2;
+    public Fight(ArrayList<Fleet> fleets) {
+        this.fleets = fleets;
     }
 
     /**
      * Выполнить
      */
-    public void execute() {
+    public ArrayList<Shot> execute() {
+
+        Random rnd = new Random(System.currentTimeMillis());
+        ArrayList<Shot> shots = new ArrayList<>();
+
+        // выполняю не более заданного числа итераций пока есть более одного непустого флота
+        for(int i = 0; i < Fight.COUNT_ITERATION && this.fleets.stream().filter(Fleet::notEmpty).count() > 1; i++) {
+
+            // формирую список кораблей с орудиями
+            List<Ship> shipsGun = this.fleets.stream()
+                    .flatMap(Fleet::getShips)
+                    .filter(Ship::isGun)
+                    .collect(Collectors.toList());
+
+            // случайным образом обрабатываю все корабли с орудиями
+            while(shipsGun.size() > 0) {
+
+                // получаю случайный корабль с орудием
+                Ship fromShip = shipsGun.get(rnd.nextInt(shipsGun.size()));
+
+                // выполняю выстрелы последовательно со всех орудий корабля
+                for (int j = 0; j < fromShip.getShipType().getGun(); j++) {
+
+                    // формирую список вражеских кораблей
+                    List<Ship> shipsEnemy = this.fleets.stream()
+                            .flatMap(Fleet::getShips)
+                            .filter(fromShip::isEnemy)
+                            .collect(Collectors.toList());
+
+                    // если не осталось вражеских кораблей
+                    if (shipsEnemy.size() == 0)
+                        break;
+
+                    // получаю случайный вражеский корабль
+                    Ship toShip = shipsEnemy.get(rnd.nextInt(shipsEnemy.size()));
+
+                    // выполняю выстрел по выбранному вражескому кораблю
+                    Shot shot = fromShip.fire(toShip, i);
+                    shots.add(shot);
+
+                    // если выстрел успешный
+                    if (shot.isResult()) {
+
+                        // удаляю пораженный корабль из флота
+                        this.fleets.stream()
+                                .forEach(v -> v.remove(toShip));
+
+                        // если пораженный корабль был с орудием, удаляю его из списка кораблей с орудием
+                        if (toShip.isGun())
+                            shipsGun.remove(toShip);
+
+                    }
+
+                }
+
+                // удаляю обработанный корабль с орудием
+                shipsGun.remove(fromShip);
+
+            }
+
+        }
+
+        return shots;
+
     }
 
-    public ArrayList<Ship> getFleet1() {
-        return fleet1;
+    public Stream<Fleet> getFleets() {
+        return fleets.stream();
     }
 
-    public ArrayList<Ship> getFleet2() {
-        return fleet2;
-    }
 }

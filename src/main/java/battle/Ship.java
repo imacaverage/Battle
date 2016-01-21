@@ -9,66 +9,77 @@ import java.util.Random;
 public class Ship {
 
     /**
-     * количество орудий
+     * объект "Раса"
      */
-    private final int gun;
+    private final Race race;
 
     /**
-     * мощность орудия
+     * объект "Тип корабля"
      */
-    private final int weapon;
-
-    /**
-     * мощность защиты
-     */
-    private final int shield;
+    private final ShipType shipType;
 
     /**
      * Создать объект
-     * @param gun количество орудий
-     * @param weapon мощность орудия
-     * @param shield мощность защиты
+     * @param race объект "Раса"
+     * @param shipType объект "Тип корабля"
      */
-    public Ship(int gun, int weapon, int shield) {
-        this.gun = gun;
-        this.weapon = weapon;
-        this.shield = shield;
+    public Ship(Race race, ShipType shipType) {
+        this.race = race;
+        this.shipType = shipType;
     }
 
     /**
      * Выстрелить
      * @param ship объект "Корабль"
-     * @return результат выстрела
+     * @param round раудн боя
+     * @return объект "Выстрел"
      */
-    public boolean fire(Ship ship) {
+    public Shot fire(Ship ship, int round) {
+        double probability = 1 - ship.getShipType().getShield() / (this.getShipType().getWeapon() * 4 + 1);
         Random rnd = new Random(System.currentTimeMillis());
-        int winEvents = 100 - ship.getShield() * 100 / (this.weapon * 4 + 1);
-        int event = rnd.nextInt(100) + 1;
-        return event <= winEvents;
+        int winEvents = (int) (1000 * probability);
+        int event = rnd.nextInt(1000) + 1;
+        return new Shot(round, this, ship, probability, event <= winEvents);
     }
 
     /**
-     * Получить количество орудий
-     * @return количество орудий
+     * Получить признак наличия орудий
+     * @return признак наличия орудий
      */
-    public int getGun() {
-        return gun;
+    public boolean isGun() {
+        return this.getShipType().getGun() > 0;
     }
 
     /**
-     * Получить мощность орудия
-     * @return мощность орудия
+     * Получить объект "Раса"
+     * @return объект "Раса"
      */
-    public int getWeapon() {
-        return weapon;
+    public Race getRace() {
+        return this.race;
     }
 
     /**
-     * Получить мощность защиты
-     * @return мощность защиты
+     * Проверить объект "Корабль" на враждебность
+     * @param ship объект "Корабль"
+     * @return true в случае успеха, иначе false
      */
-    public int getShield() {
-        return shield;
+    public boolean isEnemy(Ship ship) {
+        return this.getRace().getId() != ship.getRace().getId();
+    }
+
+    /**
+     * Получить объект "Тип корабля"
+     * @return объект "Тип корабля"
+     */
+    public ShipType getShipType() {
+        return this.shipType;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("race: %s, %s",
+                this.getRace().getName(),
+                this.getShipType().toString());
     }
 
 }
