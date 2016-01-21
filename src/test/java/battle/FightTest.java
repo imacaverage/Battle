@@ -14,21 +14,25 @@ public class FightTest {
 
     @Test
     public void testExecute() throws Exception {
-        /*
         ArrayList<Ship> ships1 = new ArrayList<>();
         ArrayList<Ship> ships2 = new ArrayList<>();
         ArrayList<Ship> ships3 = new ArrayList<>();
         Race race1 = new Race(1, "Race1");
         Race race2 = new Race(2, "Race2");
         Race race3 = new Race(3, "Race3");
+        ShipType shipSimple = new ShipType("Meet", 0, 0, 1);
+        ShipType shipDulo = new ShipType("Dulo", 1, 4, 20);
+        ShipType shipPerf = new ShipType("Perf", 10, 1, 1);
         Ship ship;
-        ship = new Ship(race1, 1, 1, 1);
+        for(int i = 0; i < 500; i++) {
+            ship = new Ship(race1, shipSimple);
+            ships1.add(ship);
+        }
+        ship = new Ship(race1, shipDulo);
         ships1.add(ship);
-        ship = new Ship(race1, 2, 1, 2);
-        ships1.add(ship);
-        ship = new Ship(race2, 1, 1, 1);
+        ship = new Ship(race2, shipDulo);
         ships2.add(ship);
-        ship = new Ship(race3, 1, 1, 5);
+        ship = new Ship(race3, shipPerf);
         ships3.add(ship);
         Fleet fleet1 = new Fleet(ships1);
         Fleet fleet2 = new Fleet(ships2);
@@ -39,8 +43,17 @@ public class FightTest {
         fleets.add(fleet3);
         Fight fight = new Fight(fleets);
         ArrayList<Shot> shots = fight.execute();
-        shots.stream().forEach(v -> System.out.printf("Race: %s, Weapon: %d -> Rase: %s, Shield: %d = %b\n", v.getFromShip().getRace().getName(), v.getFromShip().getWeapon(), v.getToShip().getRace().getName(), v.getToShip().getShield(), v.isResult()));
-        */
+        shots.stream().forEach(System.out::println);
+        if (fleets.stream().filter(Fleet::notEmpty).count() == 1)
+            System.out.println("Победитель:");
+        else
+            System.out.println("Ничья, оставшиеся расы:");
+        fleets.stream()
+                .filter(Fleet::notEmpty)
+                .flatMap(Fleet::getShips)
+                .map(Ship::getRace)
+                .distinct()
+                .forEach(System.out::println);
     }
 
 }

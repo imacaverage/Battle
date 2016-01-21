@@ -80,6 +80,14 @@ public class Shot {
     }
 
     /**
+     * Проверить вероятность поражения на ноль
+     * @return true в случае успеха, иначе false
+     */
+    public boolean isZeroProbability() {
+        return this.probability == 0;
+    }
+
+    /**
      * Получить раунд
      * @return раунд
      */

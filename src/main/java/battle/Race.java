@@ -42,4 +42,11 @@ public class Race {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return String.format("race: %s",
+                this.getName());
+
+    }
+
 }

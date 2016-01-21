@@ -12,8 +12,9 @@ import java.util.stream.Stream;
  */
 public class Fight {
 
-    public final static int COUNT_ITERATION = 100;
-
+    /**
+     * список объектов "Флот"
+     */
     private final ArrayList<Fleet> fleets;
 
     /**
@@ -33,7 +34,7 @@ public class Fight {
         ArrayList<Shot> shots = new ArrayList<>();
 
         // выполняю не более заданного числа итераций пока есть более одного непустого флота
-        for(int i = 0; i < Fight.COUNT_ITERATION && this.fleets.stream().filter(Fleet::notEmpty).count() > 1; i++) {
+        for(int i = 0; this.fleets.stream().filter(Fleet::notEmpty).count() > 1; i++) {
 
             // формирую список кораблей с орудиями
             List<Ship> shipsGun = this.fleets.stream()
@@ -86,6 +87,11 @@ public class Fight {
                 shipsGun.remove(fromShip);
 
             }
+
+            // если все выстрелы в раунде с нулевой вероятностью поражения - ничья
+            int round = i;
+            if (shots.stream().filter(v -> v.getRound() == round).allMatch(Shot::isZeroProbability))
+                break;
 
         }
 

@@ -36,6 +36,8 @@ public class Ship {
      */
     public Shot fire(Ship ship, int round) {
         double probability = 1 - ship.getShipType().getShield() / (this.getShipType().getWeapon() * 4 + 1);
+        if (probability < 0)
+            probability = 0;
         Random rnd = new Random(System.currentTimeMillis());
         int winEvents = (int) (1000 * probability);
         int event = rnd.nextInt(1000) + 1;
@@ -77,8 +79,8 @@ public class Ship {
 
     @Override
     public String toString() {
-        return String.format("race: %s, %s",
-                this.getRace().getName(),
+        return String.format("%s, %s",
+                this.getRace().toString(),
                 this.getShipType().toString());
     }
 
