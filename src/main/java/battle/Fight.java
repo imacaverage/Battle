@@ -22,6 +22,9 @@ public class Fight {
         this.fleet2 = fleet2;
     }
 
+    /**
+     * Выполнить
+     */
     public void execute() {
 
     }
