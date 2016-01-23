@@ -30,7 +30,7 @@ public class Battle extends Application {
         }
         primaryStage.setTitle("Battle in style Galaxy");
         primaryStage.setMinWidth(600);
-        primaryStage.setMinHeight(400);
+        primaryStage.setMinHeight(500);
         primaryStage.setScene(new Scene(this.rootLayout));
         primaryStage.show();
     }
