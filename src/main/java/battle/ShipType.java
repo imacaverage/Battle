@@ -6,25 +6,15 @@ package battle;
  */
 public class ShipType {
 
-    /**
-     * наименование типа
-     */
     private final String name;
 
-    /**
-     * количество орудий
-     */
     private final int gun;
 
-    /**
-     * мощность орудия
-     */
     private final double weapon;
 
-    /**
-     * мощность защиты
-     */
     private final double shield;
+
+    private final double cost;
 
     /**
      * Создать объект
@@ -38,9 +28,16 @@ public class ShipType {
         this.gun = gun;
         this.weapon = weapon;
         this.shield = shield;
+        this.cost = ShipType.calcCost(this.gun, this.weapon, this.shield);
+    }
+
+    public static double calcCost(int gun, double weapon, double shield) {
+        return (gun * weapon / 2 + 1) * (shield + 1);
     }
 
     /**
+     * наименование типа
+     */ /**
      * Получить наименование типа
      * @return наименование типа
      */
@@ -49,6 +46,8 @@ public class ShipType {
     }
 
     /**
+     * количество орудий
+     */ /**
      * Получить количество орудий
      * @return количество орудий
      */
@@ -57,6 +56,8 @@ public class ShipType {
     }
 
     /**
+     * мощность орудия
+     */ /**
      * Получить мощность орудия
      * @return мощность орудия
      */
@@ -65,11 +66,23 @@ public class ShipType {
     }
 
     /**
+     * мощность защиты
+     */ /**
      * Получить мощность защиты
      * @return мощность защиты
      */
     public double getShield() {
         return this.shield;
+    }
+
+    /**
+     * стоимость
+     */ /**
+     * Получить стоимость
+     * @return стоимость
+     */
+    public double getCost() {
+        return this.cost;
     }
 
     @Override
