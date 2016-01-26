@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox minHeight="500.0" minWidth="600.0" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="battle.view.BattleViewController">
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <children>
+      <HBox prefHeight="191.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <VBox prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <children>
+                  <Label alignment="CENTER" text="Enemy Ship Type" VBox.vgrow="NEVER">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TableView fx:id="enemyShipTypeTable" prefHeight="200.0" prefWidth="300.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="nameColumnEnemyShipTypeTable" editable="false" minWidth="120.0" prefWidth="120.0" sortable="false" text="Name" />
+                        <TableColumn id="right" fx:id="gunColumnEnemyShipTypeTable" minWidth="20.0" prefWidth="20.0" sortable="false" text="Gun" />
+                        <TableColumn id="right" fx:id="weaponColumnEnemyShipTypeTable" minWidth="50.0" prefWidth="50.0" sortable="false" text="Weapon" />
+                        <TableColumn id="right" fx:id="shieldColumnEnemyShipTypeTable" minWidth="50.0" prefWidth="50.0" sortable="false" text="Shield" />
+                        <TableColumn id="right" fx:id="costColumnEnemyShipTypeTable" minWidth="50.0" prefWidth="50.0" sortable="false" text="Cost" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="180.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <children>
+                  <Label alignment="CENTER" text="Enemy Fleet" VBox.vgrow="NEVER">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TableView fx:id="enemyFleetTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="nameColumnEnemyFleetTable" minWidth="100.0" prefWidth="100.0" sortable="false" text="Name" />
+                        <TableColumn id="right" fx:id="countColumnEnemyFleetTable" minWidth="30.0" prefWidth="30.0" sortable="false" text="Count" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="217.0" prefWidth="585.0" VBox.vgrow="ALWAYS">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <VBox prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <children>
+                  <Label alignment="CENTER" text="My Ship Type" VBox.vgrow="NEVER">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TableView fx:id="myShipTypeTable" prefHeight="200.0" prefWidth="280.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="nameColumnMyShipTypeTable" editable="false" minWidth="120.0" prefWidth="120.0" sortable="false" text="Name" />
+                        <TableColumn id="right" fx:id="gunColumnMyShipTypeTable" minWidth="20.0" prefWidth="20.0" sortable="false" text="Gun" />
+                        <TableColumn id="right" fx:id="weaponColumnMyShipTypeTable" minWidth="50.0" prefWidth="50.0" sortable="false" text="Weapon" />
+                        <TableColumn id="right" fx:id="shieldColumnMyShipTypeTable" minWidth="50.0" prefWidth="50.0" sortable="false" text="Shield" />
+                        <TableColumn id="right" fx:id="costColumnMyShipTypeTable" minWidth="50.0" prefWidth="50.0" sortable="false" text="Cost" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <HBox prefHeight="48.0" prefWidth="371.0">
+                     <children>
+                        <Button maxWidth="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#handleNewShipType" prefWidth="30.0" text="+" textAlignment="CENTER" HBox.hgrow="NEVER" />
+                        <Button maxWidth="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#handleDeleteMyShipType" prefWidth="30.0" text="-" HBox.hgrow="NEVER" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="180.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <children>
+                  <Label alignment="CENTER" text="My Fleet" VBox.vgrow="NEVER">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TableView fx:id="myFleetTable" prefHeight="200.0" prefWidth="230.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="nameColumnMyFleetTable" minWidth="100.0" prefWidth="100.0" sortable="false" text="Name" />
+                        <TableColumn id="right" fx:id="countColumnMyFleetTable" minWidth="30.0" prefWidth="30.0" sortable="false" text="Count" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <HBox prefHeight="48.0" prefWidth="371.0">
+                     <children>
+                        <Button maxWidth="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#handleNewFleet" prefWidth="30.0" text="+" textAlignment="CENTER" />
+                        <Button maxWidth="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#handleDeleteMyFleet" prefWidth="30.0" text="-" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="585.0" VBox.vgrow="NEVER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Balance" HBox.hgrow="NEVER">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="balanceTextField" alignment="BOTTOM_RIGHT" disable="true" prefHeight="25.0" prefWidth="120.0" text="0" HBox.hgrow="NEVER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <Button minWidth="100.0" mnemonicParsing="false" onAction="#handleRun" prefWidth="100.0" text="Run">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <Button minWidth="100.0" mnemonicParsing="false" onAction="#handleExit" prefWidth="100.0" text="Exit">
+               <HBox.margin>
+                  <Insets left="10.0" right="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

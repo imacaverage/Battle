@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="battle.view.BattleResultViewController">
+   <children>
+      <AnchorPane prefHeight="20.0" prefWidth="200.0">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" top="20.0" />
+         </VBox.margin>
+         <children>
+            <HBox alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label alignment="CENTER" text="Result Battle:" HBox.hgrow="NEVER" />
+                  <Label fx:id="result" text="Win">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Surviving Ships" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" top="10.0" />
+         </VBox.margin>
+      </AnchorPane>
+      <AnchorPane prefHeight="100.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TableView fx:id="shipsTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                <TableColumn fx:id="raceShipsTable" minWidth="120.0" prefWidth="120.0" text="Race" />
+                <TableColumn fx:id="nameShipsTable" minWidth="150.0" prefWidth="150.0" text="Name" />
+                  <TableColumn id="right" fx:id="weaponShipsTable" minWidth="100.0" prefWidth="100.0" text="Weapon" />
+                  <TableColumn id="right" fx:id="shieldShipsTable" minWidth="100.0" prefWidth="100.0" text="Shield" />
+                  <TableColumn id="right" fx:id="countShipsTable" minWidth="100.0" prefWidth="100.0" text="Count" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" top="10.0" />
+         </VBox.margin>
+      </AnchorPane>
+      <AnchorPane>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" top="10.0" />
+         </VBox.margin>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Shots of Battle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TableView fx:id="shotsTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                <TableColumn id="right" fx:id="roundShotsTable" editable="false" minWidth="50.0" prefWidth="50.0" sortable="false" text="Round" />
+                <TableColumn fx:id="raceFromShotsTable" editable="false" minWidth="70.0" prefWidth="70.0" sortable="false" text="Race From" />
+                  <TableColumn fx:id="nameFromShotsTable" editable="false" minWidth="100.0" prefWidth="100.0" sortable="false" text="Name From" />
+                  <TableColumn id="right" fx:id="weaponShotsTable" editable="false" minWidth="60.0" prefWidth="60.0" sortable="false" text="Weapon" />
+                  <TableColumn fx:id="raceToShotsTable" editable="false" minWidth="60.0" prefWidth="60.0" sortable="false" text="Race To" />
+                  <TableColumn fx:id="nameToShotsTable" editable="false" minWidth="100.0" prefWidth="100.0" sortable="false" text="Name To" />
+                  <TableColumn id="right" fx:id="shieldShotsTable" editable="false" minWidth="60.0" prefWidth="60.0" sortable="false" text="Shield" />
+                  <TableColumn id="right" fx:id="probabilityShotsTable" editable="false" minWidth="80.0" sortable="false" text="Probability" />
+                  <TableColumn fx:id="resultShotsTable" editable="false" minWidth="60.0" prefWidth="60.0" sortable="false" text="Result" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="5.0" />
+         </VBox.margin>
+      </AnchorPane>
+      <HBox alignment="BOTTOM_RIGHT" maxHeight="30.0" prefHeight="30.0" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </VBox.margin>
+         <children>
+            <Button maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleOK" prefWidth="100.0" text="OK" HBox.hgrow="NEVER" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
