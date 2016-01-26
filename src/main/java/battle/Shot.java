@@ -29,6 +29,11 @@ public class Shot {
     private final boolean result;
 
     /**
+     * номер выстрела
+     */
+    private long num;
+
+    /**
      * Создать объект
      * @param fromShip объект "Корабль", который стреляет
      * @param toShip объект "Корабль", по которому стреляют
@@ -96,6 +101,22 @@ public class Shot {
      */
     public void setRound(int round) {
         this.round = round;
+    }
+
+    /**
+     * Получить номер выстрела
+     * @return номер выстрела
+     */
+    public long getNum() {
+        return this.num;
+    }
+
+    /**
+     * Задать номер выстреал
+     * @param num номер выстрела
+     */
+    public void setNum(long num) {
+        this.num = num;
     }
 
     @Override

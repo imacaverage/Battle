@@ -11,6 +11,8 @@ import java.util.Locale;
  */
 public class ShotsTableModel {
 
+    private final StringProperty num;
+
     private final StringProperty round;
 
     private final StringProperty raceFrom;
@@ -30,6 +32,7 @@ public class ShotsTableModel {
     private final StringProperty result;
 
     public ShotsTableModel(Shot shot) {
+        this.num = new SimpleStringProperty(String.format("%06d", shot.getNum()));
         this.round = new SimpleStringProperty(String.valueOf(shot.getRound()));
         this.raceFrom = new SimpleStringProperty(shot.getFromShip().getRace().getName());
         this.nameShipTypeFrom = new SimpleStringProperty(shot.getFromShip().getShipType().getName());
@@ -39,6 +42,10 @@ public class ShotsTableModel {
         this.shield = new SimpleStringProperty(String.format(Locale.ENGLISH, "%.4f", shot.getToShip().getShipType().getShield()));
         this.probability = new SimpleStringProperty(String.format(Locale.ENGLISH, "%.4f", shot.getProbability()));
         this.result = new SimpleStringProperty(String.format(Locale.ENGLISH, "%b", shot.isResult()));
+    }
+
+    public StringProperty getNum() {
+        return num;
     }
 
     public StringProperty getRound() {

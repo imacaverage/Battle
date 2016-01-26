@@ -29,6 +29,7 @@ public class Fight {
      */
     public ArrayList<Shot> execute() {
 
+        long num = 0;
         Random rnd = new Random();
         ArrayList<Shot> shots = new ArrayList<>();
 
@@ -66,6 +67,7 @@ public class Fight {
                     // выполняю выстрел по выбранному вражескому кораблю
                     Shot shot = fromShip.fire(toShip);
                     shot.setRound(i);
+                    shot.setNum(++num);
                     shots.add(shot);
 
                     // если выстрел успешный

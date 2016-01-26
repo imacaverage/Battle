@@ -24,6 +24,9 @@ public class BattleResultViewController {
     private TableView<SurvivingShipsTableModel> shipsTable;
 
     @FXML
+    private TableColumn<ShotsTableModel, String> numShotsTable;
+
+    @FXML
     private TableColumn<ShotsTableModel, String> roundShotsTable;
 
     @FXML
@@ -71,7 +74,14 @@ public class BattleResultViewController {
 
     @FXML
     private void initialize() {
+        // столбцы таблицы ShipsTable
+        this.raceShipsTable.setCellValueFactory(cell -> cell.getValue().getRace());
+        this.nameShipsTable.setCellValueFactory(cell -> cell.getValue().getName());
+        this.weaponShipsTable.setCellValueFactory(cell -> cell.getValue().getWeapon());
+        this.shieldShipsTable.setCellValueFactory(cell -> cell.getValue().getShield());
+        this.countShipsTable.setCellValueFactory(cell -> cell.getValue().getCount());
         // столбцы таблицы ShotsTable
+        this.numShotsTable.setCellValueFactory(cell -> cell.getValue().getNum());
         this.roundShotsTable.setCellValueFactory(cell -> cell.getValue().getRound());
         this.raceFromShotsTable.setCellValueFactory(cell -> cell.getValue().getRaceFrom());
         this.nameFromShotsTable.setCellValueFactory(cell -> cell.getValue().getNameShipTypeFrom());
@@ -81,19 +91,13 @@ public class BattleResultViewController {
         this.shieldShotsTable.setCellValueFactory(cell -> cell.getValue().getShield());
         this.probabilityShotsTable.setCellValueFactory(cell -> cell.getValue().getProbability());
         this.resultShotsTable.setCellValueFactory(cell -> cell.getValue().getResult());
-        // столбцы таблицы ShipsTable
-        this.raceShipsTable.setCellValueFactory(cell -> cell.getValue().getRace());
-        this.nameShipsTable.setCellValueFactory(cell -> cell.getValue().getName());
-        this.weaponShipsTable.setCellValueFactory(cell -> cell.getValue().getWeapon());
-        this.shieldShipsTable.setCellValueFactory(cell -> cell.getValue().getShield());
-        this.countShipsTable.setCellValueFactory(cell -> cell.getValue().getCount());
         // надписи в таблицах, в случае если они пустые
         this.shotsTable.setPlaceholder(new Label(""));
         this.shipsTable.setPlaceholder(new Label(""));
     }
 
     @FXML
-    private void handleOK() {
+    private void handleOk() {
         this.stage.close();
     }
 

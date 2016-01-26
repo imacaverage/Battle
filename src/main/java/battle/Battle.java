@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Battle extends Application {
 
@@ -191,16 +192,8 @@ public class Battle extends Application {
         fleets.stream()
                 .filter(Fleet::notEmpty)
                 .flatMap(Fleet::getShips)
-                .distinct()
-                .forEach(v -> {
-                    int count = (int) fleets.stream()
-                            .flatMap(Fleet::getShips)
-                            .map(Ship::getShipType)
-                            .map(ShipType::getName)
-                            .filter(v.getShipType().getName()::equals)
-                            .count();
-                    survivingShipsTableModels.add(new SurvivingShipsTableModel(v, count));
-                });
+                .collect(Collectors.groupingBy(Ship::hashCode))
+                .forEach((hash, list) -> survivingShipsTableModels.add(new SurvivingShipsTableModel(list.get(0), list.size())));
         return new BattleResultModel(survivingShipsTableModels, shotsTableModels, result);
     }
 
