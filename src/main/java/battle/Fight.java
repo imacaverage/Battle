@@ -30,7 +30,7 @@ public class Fight {
      */
     public ArrayList<Shot> execute() {
 
-        Random rnd = new Random(System.currentTimeMillis());
+        Random rnd = new Random();
         ArrayList<Shot> shots = new ArrayList<>();
 
         // выполняю не более заданного числа итераций пока есть более одного непустого флота

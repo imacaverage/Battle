@@ -29,6 +29,13 @@ public class ShipTypeTableModel {
         this.cost = new SimpleStringProperty(String.format(Locale.ENGLISH, "%.4f", shipType.getCost()));
     }
 
+    public ShipType getShipType() {
+        return new ShipType(this.name.get(),
+                Integer.parseInt(this.gun.get()),
+                Double.parseDouble(this.weapon.get()),
+                Double.parseDouble(this.shield.get()));
+    }
+
     public StringProperty getNameProperty() {
         return this.name;
     }

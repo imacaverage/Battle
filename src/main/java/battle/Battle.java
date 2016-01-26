@@ -4,9 +4,8 @@ package battle;
  * Created by iMacAverage on 22.01.16.
  */
 
-import battle.model.BattleModel;
-import battle.model.FleetTableModel;
-import battle.model.ShipTypeTableModel;
+import battle.model.*;
+import battle.view.BattleResultViewController;
 import battle.view.BattleViewController;
 import battle.view.FleetViewController;
 import battle.view.ShipTypeViewController;
@@ -20,6 +19,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Battle extends Application {
 
@@ -59,12 +63,12 @@ public class Battle extends Application {
         ObservableList<ShipTypeTableModel> myShipTypeData = FXCollections.observableArrayList();
         ObservableList<FleetTableModel> enemyFleetData = FXCollections.observableArrayList();
         ObservableList<FleetTableModel> myFleetData = FXCollections.observableArrayList();
-        shipType = new ShipType("Simple", 1, 1, 1);
+        shipType = new ShipType("Simple", 1, 1.5, 0);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
-        enemyFleetData.add(new FleetTableModel(shipType, 20));
-        shipType = new ShipType("Barrel", 1, 20, 5);
+        enemyFleetData.add(new FleetTableModel(shipType, 200));
+        shipType = new ShipType("Barrel", 1, 30, 5);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
-        enemyFleetData.add(new FleetTableModel(shipType, 5));
+        enemyFleetData.add(new FleetTableModel(shipType, 2));
         this.battleModel = new BattleModel(enemyShipTypeData, enemyFleetData, myShipTypeData, myFleetData, new Double(300));
     }
 
@@ -112,6 +116,96 @@ public class Battle extends Application {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public void showBattleResultDialog() {
+        BattleResultModel battleResultModel = this.runBattle();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/battle/view/BattleResultView.fxml"));
+        try {
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Battle Result");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(this.stage);
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
+            BattleResultViewController battleResultViewController = loader.getController();
+            battleResultViewController.setModel(battleResultModel);
+            battleResultViewController.setStage(stage);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private BattleResultModel runBattle() {
+        int result;
+        Race enemyRace = new Race(0, "Enemy");
+        Race myRace = new Race(1, "MyRace");
+        ArrayList<Ship> enemyShips = new ArrayList<>();
+        this.getBattleModel().getEnemyFleetData().stream()
+                .forEach(v -> {
+                    int count = Integer.parseInt(v.getCount());
+                    Optional<ShipType> shipType = this.getBattleModel().getEnemyShipTypeData().stream()
+                            .filter(type -> type.getName().equals(v.getName()))
+                            .findFirst()
+                            .map(ShipTypeTableModel::getShipType);
+                    if (shipType.isPresent()) {
+                        Ship ship = new Ship(enemyRace, shipType.get());
+                        for (int i = 0; i < count; i++)
+                            enemyShips.add(ship);
+                    }
+                });
+        ArrayList<Ship> myShips = new ArrayList<>();
+        this.getBattleModel().getMyFleetData().stream()
+                .forEach(v -> {
+                    int count = Integer.parseInt(v.getCount());
+                    Optional<ShipType> shipType = this.getBattleModel().getMyShipTypeData().stream()
+                            .filter(type -> type.getName().equals(v.getName()))
+                            .findFirst()
+                            .map(ShipTypeTableModel::getShipType);
+                    if (shipType.isPresent()) {
+                        Ship ship = new Ship(myRace, shipType.get());
+                        for (int i = 0; i < count; i++)
+                            myShips.add(ship);
+                    }
+                });
+        ArrayList<Fleet> fleets = new ArrayList<>();
+        fleets.add(new Fleet(enemyShips));
+        fleets.add(new Fleet(myShips));
+        Fight fight = new Fight(fleets);
+        ArrayList<Shot> shots = fight.execute();
+        if (fleets.stream().filter(Fleet::notEmpty).count() == 1) {
+            Optional<Race> race = fleets.stream()
+                    .filter(Fleet::notEmpty)
+                    .flatMap(Fleet::getShips)
+                    .map(Ship::getRace)
+                    .distinct()
+                    .findFirst();
+            result = race.get().getId() == 0? -1: 1;
+        }
+        else
+            result = 0;
+        ObservableList<ShotsTableModel> shotsTableModels = FXCollections.observableArrayList();
+        shots.stream()
+                .map(ShotsTableModel::new)
+                .forEach(shotsTableModels::add);
+        ObservableList<SurvivingShipsTableModel> survivingShipsTableModels = FXCollections.observableArrayList();
+        fleets.stream()
+                .filter(Fleet::notEmpty)
+                .flatMap(Fleet::getShips)
+                .distinct()
+                .forEach(v -> {
+                    int count = (int) fleets.stream()
+                            .flatMap(Fleet::getShips)
+                            .map(Ship::getShipType)
+                            .map(ShipType::getName)
+                            .filter(v.getShipType().getName()::equals)
+                            .count();
+                    survivingShipsTableModels.add(new SurvivingShipsTableModel(v, count));
+                });
+        return new BattleResultModel(survivingShipsTableModels, shotsTableModels, result);
     }
 
     public BattleModel getBattleModel() {

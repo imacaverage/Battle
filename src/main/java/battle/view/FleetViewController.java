@@ -65,6 +65,11 @@ public class FleetViewController {
         if (this.nameShipTypeComboBox.getValue() == null || this.nameShipTypeComboBox.getValue().length() == 0 ) {
             errorMessage += "No select Ship Type!\n";
         }
+        if (this.battle.getBattleModel().getMyFleetData().stream()
+                .map(FleetTableModel::getName)
+                .anyMatch(v -> v.equals(this.nameShipTypeComboBox.getValue()))) {
+            errorMessage += "No valid Ship Type (this Ship Type already exists)!\n";
+        }
         if (this.countTextField.getText() == null || this.countTextField.getText().length() == 0 ) {
             errorMessage += "No valid Count!\n";
         }

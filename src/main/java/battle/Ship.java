@@ -38,7 +38,7 @@ public class Ship {
         double probability = 1 - ship.getShipType().getShield() / (this.getShipType().getWeapon() * 4 + 1);
         if (probability < 0)
             probability = 0;
-        Random rnd = new Random(System.currentTimeMillis());
+        Random rnd = new Random();
         int winEvents = (int) (1000 * probability);
         int event = rnd.nextInt(1000) + 1;
         return new Shot(round, this, ship, probability, event <= winEvents);

@@ -195,6 +195,11 @@ public class BattleViewController {
     }
 
     @FXML
+    private void handleRun() {
+        this.battle.showBattleResultDialog();
+    }
+
+    @FXML
     private void handleExit() {
         this.battle.getStage().close();
     }
