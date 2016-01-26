@@ -6,10 +6,7 @@ package battle;
  */
 public class Shot {
 
-    /**
-     * раунд боя
-     */
-    private final int round;
+    private int round;
 
     /**
      * объект "Корабль", который стреляет
@@ -33,14 +30,12 @@ public class Shot {
 
     /**
      * Создать объект
-     * @param round раунд боя
      * @param fromShip объект "Корабль", который стреляет
      * @param toShip объект "Корабль", по которому стреляют
      * @param probability вероятность выстрела
      * @param result результат выстрела
      */
-    public Shot(int round, Ship fromShip, Ship toShip, double probability, boolean result) {
-        this.round = round;
+    public Shot(Ship fromShip, Ship toShip, double probability, boolean result) {
         this.fromShip = fromShip;
         this.toShip = toShip;
         this.probability = probability;
@@ -93,6 +88,14 @@ public class Shot {
      */
     public int getRound() {
         return this.round;
+    }
+
+    /**
+     * Задать раунд боя
+      * @param round раунд боя
+     */
+    public void setRound(int round) {
+        this.round = round;
     }
 
     @Override

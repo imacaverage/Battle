@@ -17,13 +17,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class Battle extends Application {
 
@@ -66,10 +62,10 @@ public class Battle extends Application {
         shipType = new ShipType("Simple", 1, 1.5, 0);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
         enemyFleetData.add(new FleetTableModel(shipType, 200));
-        shipType = new ShipType("Barrel", 1, 30, 5);
+        shipType = new ShipType("Barrel", 1, 40, 8);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
-        enemyFleetData.add(new FleetTableModel(shipType, 2));
-        this.battleModel = new BattleModel(enemyShipTypeData, enemyFleetData, myShipTypeData, myFleetData, new Double(300));
+        enemyFleetData.add(new FleetTableModel(shipType, 1));
+        this.battleModel = new BattleModel(enemyShipTypeData, enemyFleetData, myShipTypeData, myFleetData, 300.);
     }
 
     public boolean showShipTypeDialog(ShipTypeTableModel shipTypeTableModel) {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Класс "Бой"
@@ -65,7 +64,8 @@ public class Fight {
                     Ship toShip = shipsEnemy.get(rnd.nextInt(shipsEnemy.size()));
 
                     // выполняю выстрел по выбранному вражескому кораблю
-                    Shot shot = fromShip.fire(toShip, i);
+                    Shot shot = fromShip.fire(toShip);
+                    shot.setRound(i);
                     shots.add(shot);
 
                     // если выстрел успешный
@@ -88,19 +88,21 @@ public class Fight {
 
             }
 
-            // если все выстрелы в раунде с нулевой вероятностью поражения - ничья
-            int round = i;
-            if (shots.stream().filter(v -> v.getRound() == round).allMatch(Shot::isZeroProbability))
+            // если ни один из оставшихся кораблей с орудием не может поразить ни один корабль - ничья
+            if (this.fleets.stream()
+                    .flatMap(Fleet::getShips)
+                    .filter(Ship::isGun)
+                    .allMatch(gun -> this.fleets.stream()
+                                .flatMap(Fleet::getShips)
+                                .filter(gun::isEnemy)
+                                .map(gun::fire)
+                                .allMatch(Shot::isZeroProbability)))
                 break;
 
         }
 
         return shots;
 
-    }
-
-    public Stream<Fleet> getFleets() {
-        return fleets.stream();
     }
 
 }

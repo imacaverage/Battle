@@ -38,7 +38,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="100.0" VBox.vgrow="ALWAYS">
          <children>
-            <TableView fx:id="shipsTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="shipsTable" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
                 <TableColumn fx:id="raceShipsTable" minWidth="120.0" prefWidth="120.0" text="Race" />
                 <TableColumn fx:id="nameShipsTable" minWidth="150.0" prefWidth="150.0" text="Name" />
@@ -68,7 +68,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <TableView fx:id="shotsTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="shotsTable" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
                 <TableColumn id="right" fx:id="roundShotsTable" editable="false" minWidth="50.0" prefWidth="50.0" sortable="false" text="Round" />
                 <TableColumn fx:id="raceFromShotsTable" editable="false" minWidth="70.0" prefWidth="70.0" sortable="false" text="Race From" />
@@ -94,7 +94,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" />
          </VBox.margin>
          <children>
-            <Button maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleOK" prefWidth="100.0" text="OK" HBox.hgrow="NEVER" />
+            <Button cancelButton="true" defaultButton="true" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleOK" prefWidth="100.0" text="OK" HBox.hgrow="NEVER" />
          </children>
       </HBox>
    </children>

@@ -16,7 +16,7 @@ public class ShipTest {
         Race race2 = new Race(2, "Race2");
         Ship ship = new Ship(race1, shipType1);
         Ship shipEnemy = new Ship(race2, shipType2);
-        Shot shot = ship.fire(shipEnemy, 1);
+        Shot shot = ship.fire(shipEnemy);
         System.out.println(shot.toString());
     }
 }

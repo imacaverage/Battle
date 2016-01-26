@@ -32,7 +32,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView fx:id="enemyShipTypeTable" prefHeight="200.0" prefWidth="300.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="enemyShipTypeTable" focusTraversable="false" prefHeight="200.0" prefWidth="300.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="nameColumnEnemyShipTypeTable" editable="false" minWidth="120.0" prefWidth="120.0" sortable="false" text="Name" />
                         <TableColumn id="right" fx:id="gunColumnEnemyShipTypeTable" minWidth="20.0" prefWidth="20.0" sortable="false" text="Gun" />
@@ -56,7 +56,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView fx:id="enemyFleetTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="enemyFleetTable" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="nameColumnEnemyFleetTable" minWidth="100.0" prefWidth="100.0" sortable="false" text="Name" />
                         <TableColumn id="right" fx:id="countColumnEnemyFleetTable" minWidth="30.0" prefWidth="30.0" sortable="false" text="Count" />
@@ -87,7 +87,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView fx:id="myShipTypeTable" prefHeight="200.0" prefWidth="280.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="myShipTypeTable" focusTraversable="false" prefHeight="200.0" prefWidth="280.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="nameColumnMyShipTypeTable" editable="false" minWidth="120.0" prefWidth="120.0" sortable="false" text="Name" />
                         <TableColumn id="right" fx:id="gunColumnMyShipTypeTable" minWidth="20.0" prefWidth="20.0" sortable="false" text="Gun" />
@@ -117,7 +117,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView fx:id="myFleetTable" prefHeight="200.0" prefWidth="230.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="myFleetTable" focusTraversable="false" prefHeight="200.0" prefWidth="230.0" stylesheets="@BattleView.css" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="nameColumnMyFleetTable" minWidth="100.0" prefWidth="100.0" sortable="false" text="Name" />
                         <TableColumn id="right" fx:id="countColumnMyFleetTable" minWidth="30.0" prefWidth="30.0" sortable="false" text="Count" />
