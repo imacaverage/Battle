@@ -90,7 +90,7 @@ public class Fight {
 
             }
 
-            // если ни один из оставшихся кораблей с орудием не может поразить ни один корабль противника - ничья
+            // если ни один из оставшихся кораблей с орудием не может поразить ни один корабль (вероятность < 1%) противника - ничья
             if (this.fleets.stream()
                     .flatMap(Fleet::getShips)
                     .filter(Ship::isGun)
@@ -98,7 +98,7 @@ public class Fight {
                                 .flatMap(Fleet::getShips)
                                 .filter(gun::isEnemy)
                                 .map(gun::fire)
-                                .allMatch(Shot::isZeroProbability)))
+                                .allMatch(shot -> shot.getProbability() < 0.01)))
                 break;
 
         }

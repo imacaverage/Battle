@@ -63,9 +63,9 @@ public class Battle extends Application {
         ObservableList<ShipTypeTableModel> myShipTypeData = FXCollections.observableArrayList();
         ObservableList<FleetTableModel> enemyFleetData = FXCollections.observableArrayList();
         ObservableList<FleetTableModel> myFleetData = FXCollections.observableArrayList();
-        shipType = new ShipType("1", 1, 0.5, 0);
+        shipType = new ShipType("1", 0, 0, 1);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
-        enemyFleetData.add(new FleetTableModel(shipType, 200));
+        enemyFleetData.add(new FleetTableModel(shipType, 400));
         shipType = new ShipType("2", 100, 1, 5);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
         enemyFleetData.add(new FleetTableModel(shipType, 1));
