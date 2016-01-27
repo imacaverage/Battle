@@ -19,7 +19,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Battle extends Application {
@@ -60,18 +63,15 @@ public class Battle extends Application {
         ObservableList<ShipTypeTableModel> myShipTypeData = FXCollections.observableArrayList();
         ObservableList<FleetTableModel> enemyFleetData = FXCollections.observableArrayList();
         ObservableList<FleetTableModel> myFleetData = FXCollections.observableArrayList();
-        shipType = new ShipType("Simple1", 1, 0.5, 0);
+        shipType = new ShipType("1", 10, 0.5, 0);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
         enemyFleetData.add(new FleetTableModel(shipType, 80));
-        shipType = new ShipType("Simple2", 1, 1, 0);
+        shipType = new ShipType("2", 1, 10, 0);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
-        enemyFleetData.add(new FleetTableModel(shipType, 80));
-        shipType = new ShipType("Simple3", 1, 1.5, 0);
+        enemyFleetData.add(new FleetTableModel(shipType, 10));
+        shipType = new ShipType("3", 1, 40, 0);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
-        enemyFleetData.add(new FleetTableModel(shipType, 80));
-        shipType = new ShipType("Barrel", 1, 50, 4);
-        enemyShipTypeData.add(new ShipTypeTableModel(shipType));
-        enemyFleetData.add(new FleetTableModel(shipType, 1));
+        enemyFleetData.add(new FleetTableModel(shipType, 10));
         this.battleModel = new BattleModel(enemyShipTypeData, enemyFleetData, myShipTypeData, myFleetData, 300.);
     }
 
@@ -198,8 +198,10 @@ public class Battle extends Application {
         fleets.stream()
                 .filter(Fleet::notEmpty)
                 .flatMap(Fleet::getShips)
-                .collect(Collectors.groupingBy(Ship::hashCode))
-                .forEach((hash, list) -> survivingShipsTableModels.add(new SurvivingShipsTableModel(list.get(0), list.size())));
+                .collect(Collectors.groupingBy(Ship::getRace, Collectors.groupingBy(Ship::getShipType)))
+                .values().stream()
+                .flatMap(map -> map.values().stream())
+                .forEach(list -> survivingShipsTableModels.add(new SurvivingShipsTableModel(list.get(0), list.size())));
         return new BattleResultModel(survivingShipsTableModels, shotsTableModels, result);
     }
 
