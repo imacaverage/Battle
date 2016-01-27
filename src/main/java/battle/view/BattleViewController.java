@@ -4,6 +4,10 @@ import battle.Battle;
 import battle.ShipType;
 import battle.model.FleetTableModel;
 import battle.model.ShipTypeTableModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
+import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.util.Locale;
@@ -70,6 +74,9 @@ public class BattleViewController {
 
     @FXML
     private TextField balanceTextField;
+
+    @FXML
+    private Button runButton;
 
     private Battle battle;
 
@@ -196,7 +203,21 @@ public class BattleViewController {
 
     @FXML
     private void handleRun() {
-        this.battle.showBattleResultDialog();
+        this.runButton.setDisable(true);
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                battle.runBattle();
+                return null;
+            }
+        };
+        task.stateProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == Worker.State.SUCCEEDED) {
+                battle.showBattleResultDialog();
+                runButton.setDisable(false);
+            }
+        });
+        new Thread(task).start();
     }
 
     @FXML

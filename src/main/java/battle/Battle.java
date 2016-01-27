@@ -19,10 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Battle extends Application {
@@ -30,6 +27,8 @@ public class Battle extends Application {
     private Stage stage;
 
     private BattleModel battleModel;
+
+    private BattleResultModel battleResultModel;
 
     public static void main(String[] args) {
         launch(args);
@@ -125,7 +124,6 @@ public class Battle extends Application {
     }
 
     public void showBattleResultDialog() {
-        BattleResultModel battleResultModel = this.runBattle();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/battle/view/BattleResultView.fxml"));
         try {
@@ -137,7 +135,7 @@ public class Battle extends Application {
             Scene scene = new Scene(parent);
             stage.setScene(scene);
             BattleResultViewController battleResultViewController = loader.getController();
-            battleResultViewController.setModel(battleResultModel);
+            battleResultViewController.setModel(this.battleResultModel);
             battleResultViewController.setStage(stage);
             stage.showAndWait();
         } catch (IOException e) {
@@ -145,7 +143,7 @@ public class Battle extends Application {
         }
     }
 
-    private BattleResultModel runBattle() {
+    public void runBattle() {
         int result;
         Race enemyRace = new Race(0, "Enemy");
         Race myRace = new Race(1, "MyRace");
@@ -205,7 +203,7 @@ public class Battle extends Application {
                 .values().stream()
                 .flatMap(map -> map.values().stream())
                 .forEach(list -> survivingShipsTableModels.add(new SurvivingShipsTableModel(list.get(0), list.size())));
-        return new BattleResultModel(survivingShipsTableModels, shotsTableModels, result);
+        this.battleResultModel = new BattleResultModel(survivingShipsTableModels, shotsTableModels, result);
     }
 
     public BattleModel getBattleModel() {

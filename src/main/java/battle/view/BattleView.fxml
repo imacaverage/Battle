@@ -158,7 +158,7 @@
                   </TextField>
                </children>
             </HBox>
-            <Button minWidth="100.0" mnemonicParsing="false" onAction="#handleRun" prefWidth="100.0" text="Run">
+            <Button fx:id="runButton" minWidth="100.0" mnemonicParsing="false" onAction="#handleRun" prefWidth="100.0" text="Run">
                <HBox.margin>
                   <Insets />
                </HBox.margin>

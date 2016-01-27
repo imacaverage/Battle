@@ -37,6 +37,19 @@ public class FleetViewController {
     @FXML
     private void initialize() {
         this.nameShipTypeComboBox.setPromptText("Select Ship Type");
+        this.nameShipTypeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            Double cost = battle.getBattleModel().getMyShipTypeData().stream()
+                    .filter(v -> v.getName().equals(newValue))
+                    .map(ShipTypeTableModel::getCost)
+                    .map(Double::parseDouble)
+                    .findFirst()
+                    .orElse(0.);
+            try {
+                int count = Integer.parseInt(countTextField.getText());
+                this.costTextField.setText(String.format(Locale.ENGLISH, "%.4f", cost * count));
+            }
+            catch (NumberFormatException e) {}
+        });
         this.countTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             Double cost = battle.getBattleModel().getMyShipTypeData().stream()
                     .filter(v -> v.getName().equals(this.nameShipTypeComboBox.getValue()))
