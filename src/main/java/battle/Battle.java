@@ -63,16 +63,19 @@ public class Battle extends Application {
         ObservableList<ShipTypeTableModel> myShipTypeData = FXCollections.observableArrayList();
         ObservableList<FleetTableModel> enemyFleetData = FXCollections.observableArrayList();
         ObservableList<FleetTableModel> myFleetData = FXCollections.observableArrayList();
-        shipType = new ShipType("1", 10, 0.5, 0);
+        shipType = new ShipType("1", 1, 0.5, 0);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
-        enemyFleetData.add(new FleetTableModel(shipType, 80));
-        shipType = new ShipType("2", 1, 10, 0);
+        enemyFleetData.add(new FleetTableModel(shipType, 200));
+        shipType = new ShipType("2", 100, 1, 5);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
-        enemyFleetData.add(new FleetTableModel(shipType, 10));
-        shipType = new ShipType("3", 1, 40, 0);
+        enemyFleetData.add(new FleetTableModel(shipType, 1));
+        shipType = new ShipType("3", 1, 40, 1);
         enemyShipTypeData.add(new ShipTypeTableModel(shipType));
-        enemyFleetData.add(new FleetTableModel(shipType, 10));
-        this.battleModel = new BattleModel(enemyShipTypeData, enemyFleetData, myShipTypeData, myFleetData, 300.);
+        enemyFleetData.add(new FleetTableModel(shipType, 2));
+        shipType = new ShipType("4", 0, 0, 40);
+        enemyShipTypeData.add(new ShipTypeTableModel(shipType));
+        enemyFleetData.add(new FleetTableModel(shipType, 1));
+        this.battleModel = new BattleModel(enemyShipTypeData, enemyFleetData, myShipTypeData, myFleetData, 1000.);
     }
 
     public boolean showShipTypeDialog(ShipTypeTableModel shipTypeTableModel) {

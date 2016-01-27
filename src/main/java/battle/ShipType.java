@@ -31,8 +31,15 @@ public class ShipType {
         this.cost = ShipType.calcCost(this.gun, this.weapon, this.shield);
     }
 
+    /**
+     * Рассчитать стоимость корабля
+     * @param gun количество орудий
+     * @param weapon мощность орудия
+     * @param shield мощность защиты
+     * @return стоимость корабля
+     */
     public static double calcCost(int gun, double weapon, double shield) {
-        return (gun * weapon / 2 + 1) * (shield + 1);
+        return (gun * weapon + 1) * (shield + 1);
     }
 
     /**

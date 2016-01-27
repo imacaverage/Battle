@@ -38,7 +38,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="100.0" VBox.vgrow="ALWAYS">
          <children>
-            <TableView fx:id="shipsTable" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="shipsTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
                 <TableColumn fx:id="raceShipsTable" minWidth="120.0" prefWidth="120.0" text="Race" />
                 <TableColumn fx:id="nameShipsTable" minWidth="150.0" prefWidth="150.0" text="Name" />
@@ -68,7 +68,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <TableView fx:id="shotsTable" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="shotsTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@BattleView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
                   <TableColumn fx:id="numShotsTable" minWidth="40.0" prefWidth="40.0" text="Num" />
                 <TableColumn id="right" fx:id="roundShotsTable" minWidth="50.0" prefWidth="50.0" text="Round" />
